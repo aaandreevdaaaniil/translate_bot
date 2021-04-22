@@ -30,7 +30,7 @@ def main():
 def start(update, context):
     global markup
     # Проверка, есть ли уже пользователь в базе данных, если нет,
-    # то добавить его туда, чтобы потом можно было изменять язык
+    # то добавляет его туда, чтобы потом можно было изменять язык
     # конкретно для данного пользователя
     con = sqlite3.connect('userdata.sqlite')
     cur = con.cursor()
@@ -70,6 +70,8 @@ def help_(update, context):
 
 def ru(update, context):
     global markup
+    # Изменяет язык для конкретного пользователя
+    # И так с остальными языками
     con = sqlite3.connect('userdata.sqlite')
     cur = con.cursor()
     user_id = str(update.message.from_user.id)
@@ -147,6 +149,9 @@ def ja(update, context):
 
 
 def translate(update, context):
+    # Вызывает функцию translate_, передавая ей текст
+    # и язык, который выбран у данного пользователя,
+    # после получает ответ и отсылает его
     con = sqlite3.connect('userdata.sqlite')
     cur = con.cursor()
     user_id = str(update.message.from_user.id)
@@ -160,6 +165,8 @@ def translate(update, context):
 
 
 def translate_(text, lang):
+    # Отсылает полученный текст в Yandex Translate,
+    # после чего склеивает результат и возвращает его
     token = 't1.9euelZrMk8rJkZmTnJyYxs6aipDMne3rnpWay5aVnsfNmJ6Oxs_MzMiUlI7l8_dAVnt7-e9_DiQo_N3z9wAFeXv5738OJCj8.' \
             'AtSIM2vXIjOKHHCdlVDa1B4IlJogRQX66ImUCzcmupZ6gd_nAMeqyhEdqamL8Lu9v4mCZmh0o8mVXd4HiimODQ'
 
